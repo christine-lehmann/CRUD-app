@@ -12,36 +12,34 @@ useUnifiedTopology: true}).then(() => {
 
 app.set('view engine','ejs');
 
+// tesing route
 // create items once refresh
-app.get('/create-item',(req, res) => {
-    const item = new Item({
-        name: 'computer',
-        price: 35000
-    });
-    item.save().then(result=>res.send(result)).catch(err =>
-        console.log(err))
+// app.get('/create-item',(req, res) => {
+//     const item = new Item({
+//         name: 'computer',
+//         price: 35000
+//     });
+//     item.save().then(result=>res.send(result)).catch(err =>
+//         console.log(err))
+// })
+// // get item by id
+// app.get('/get-item',(req, res) => {
+
+//     Item.findById('65051d594ab5a4e60e307308').then(result=>res.send(result)).catch(err =>
+//         console.log(err))
+
+// })
+app.get('/', (req, res) => {
+    res.redirect('/get-items');
 })
-// get all items
+// render data
+// get all items 
 app.get('/get-items',(req, res) => {
 
-    Item.find().then(result=>res.send(result)).catch(err =>
-        console.log(err))
+    Item.find().then(result=> {
 
-})
-// get item by id
-app.get('/get-item',(req, res) => {
-
-    Item.findById('65051d594ab5a4e60e307308').then(result=>res.send(result)).catch(err =>
-        console.log(err))
-
-})
-app.get('/', (req, res) => {
-    const items = [
-        { name: 'smart phone', price: 15000},
-        { name: 'book', price: 150},
-        { name: 'computer', price: 35000},    
-    ]
-    res.render('index', { items });
+        res.render('index', { items: result });
+    }).catch(err => console.log(err))
 })
 app.get('/add-item', (req, res)=> {
     res.render('add-item');
