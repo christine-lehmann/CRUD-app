@@ -1,8 +1,15 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
+const mongodb = 'mongodb+srv://admin:admin@cluster0.1blzevm.mongodb.net/itemDB?retryWrites=true&w=majority';
+mongoose.connect(mongodb, { useNewUrlParser: true, 
+useUnifiedTopology: true}).then(() => {
+    console.log('Connected')
+    app.listen(3000);
+}).catch(err => console.log(err))
 
 app.set('view engine','ejs');
-app.listen(3000);
+
 
 app.get('/', (req, res) => {
     const items = [
