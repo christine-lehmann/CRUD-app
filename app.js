@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 // import model
 const Item = require('./models/items');
 const app = express();
+
+// added middleware for post request
+app.use(express.urlencoded({ extended:true }));
 const mongodb = 'mongodb+srv://admin:admin@cluster0.1blzevm.mongodb.net/itemDB?retryWrites=true&w=majority';
 mongoose.connect(mongodb, { useNewUrlParser: true, 
 useUnifiedTopology: true}).then(() => {
@@ -44,6 +47,15 @@ app.get('/get-items',(req, res) => {
 app.get('/add-item', (req, res)=> {
     res.render('add-item');
 })
+// post request (add items)
+app.post('/items',(req, res)=> {
+    console.log(req.body)
+    const item = Item(req.body);
+    item.save().then(()=> {
+        res.redirect('/get-items')
+    }).catch(err => console.log(err))
+})
+
 app.use((req, res)=> {
     res.render('error');
 })
