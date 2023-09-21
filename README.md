@@ -60,9 +60,9 @@ Before you begin, ensure you have met the following requirements:
 
 Contributions are welcome! If you'd like to improve this project or add new features, please open an issue or submit a pull request.
 
-### License
+<!--### License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.-->
 
 ### Acknowledgments
 
