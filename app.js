@@ -55,6 +55,15 @@ app.post('/items',(req, res)=> {
         res.redirect('/get-items')
     }).catch(err => console.log(err))
 })
+// Route parameter
+// get items by id
+app.get('/items/:id', (req, res) => {
+    const id = req.params.id;
+    Item.findById(id).then(result => {
+        console.log('result',result);
+        res.render('item-detail', {item: result})
+    })
+})
 
 app.use((req, res)=> {
     res.render('error');
